@@ -1,0 +1,78 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Stripe</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #userInput {
+            width: 300px;
+            padding: 5px;
+            font-size: 16px;
+        }
+        #welcome {
+            font-size: 20px;
+            margin-top: 20px;
+            display: none; /* Hide the welcome message by default */
+        }
+        #response {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        #moreDetails {
+            font-size: 18px;
+            margin-top: 20px;
+            color: blue;
+            cursor: pointer;
+            display: none;
+        }
+        #moreDetails:hover, #response:hover {
+            background-image: linear-gradient(to right, rgb(212, 48, 136), rgb(214, 71, 150), rgb(217, 96, 166), rgb(216, 102, 171), rgb(212, 99, 171), rgb(217, 124, 185), rgb(209, 107, 178), rgb(208, 112, 182), rgb(199, 96, 177), rgb(191, 83, 172));
+            background-size: contain;
+            color:white;
+          
+        }
+        .stripe {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+            padding-top: 3.5px;
+        }
+        .stripe img {
+            width: 35px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="userInput" placeholder="Enter 'stripe#1159'">
+    <div id="welcome">Welcome to <span class="stripe"><img src="https://i.gyazo.com/2cb20114a6d97c803deaecf84089054c.png" alt="Stripe Logo"></span>, when you need an online cash register or card payment processing payment systems for your goods that's us</div>
+    <div id="response"></div>
+    <div id="moreDetails">More About Stripe</div>
+    <script>
+        document.getElementById("userInput").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                var userInput = event.target.value.toLowerCase();
+                if (userInput === "stripe#1159") {
+                    // Show the welcome message and other content
+                    document.getElementById("welcome").style.display = "block";
+                    document.getElementById("response").innerText = "I need to add price tags to my goods and have a secure payment system that collects debit/card information safely and securely and seamlessly.";
+                    document.getElementById("moreDetails").style.display = "block";
+                } else {
+                    // Hide the welcome message and other content
+                    document.getElementById("welcome").style.display = "none";
+                    document.getElementById("response").innerText = "";
+                    document.getElementById("moreDetails").style.display = "none";
+                }
+                event.target.value = "";
+            }
+        });
+
+        document.getElementById("moreDetails").addEventListener("click", function() {
+            // Add the URL to Stripe's "More Details" page here
+            window.location.href = "https://www.stripe.com/more-details";
+        });
+    </script>
+</body>
+</html>
