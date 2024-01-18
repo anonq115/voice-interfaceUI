@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Welcome to Stripe</title>
@@ -16,9 +16,24 @@
             margin-top: 20px;
             display: none; /* Hide the welcome message by default */
         }
+        #responseContainer {
+            position: relative; /* Add relative positioning to the container */
+        }
         #response {
             font-size: 18px;
             margin-top: 20px;
+        }
+        #scenario {
+            font-size: 18px;
+            margin-top: 20px;
+            color: green;
+            display: none;
+            position: absolute; /* Add absolute positioning to the scenario text */
+            top: -35px; /* Position it at the top of the container */
+            left: 0; /* Position it at the left of the container */
+            width: 100%; /* Make it take the full width of the container */
+            background-color: white; /* Add white background */
+            cursor: pointer; /* Add cursor pointer for interaction */
         }
         #moreDetails {
             font-size: 18px;
@@ -27,11 +42,17 @@
             cursor: pointer;
             display: none;
         }
-        #moreDetails:hover, #response:hover {
+        #gameplay {
+            font-size: 18px;
+            margin-top: 20px;
+            color: green;
+            cursor: pointer;
+            display: none;
+        }
+        #moreDetails:hover, #response:hover, #gameplay:hover {
             background-image: linear-gradient(to right, rgb(212, 48, 136), rgb(214, 71, 150), rgb(217, 96, 166), rgb(216, 102, 171), rgb(212, 99, 171), rgb(217, 124, 185), rgb(209, 107, 178), rgb(208, 112, 182), rgb(199, 96, 177), rgb(191, 83, 172));
             background-size: contain;
             color:white;
-          
         }
         .stripe {
             display: inline-block;
@@ -48,9 +69,15 @@
 <body>
     <input type="text" id="userInput" placeholder="Enter 'stripe#1159'">
     <div id="welcome">Welcome to <span class="stripe"><img src="https://i.gyazo.com/2cb20114a6d97c803deaecf84089054c.png" alt="Stripe Logo"></span>, when you need an online cash register or card payment processing payment systems for your goods that's us</div>
-    <div id="response"></div>
+    <div id="responseContainer">
+        <div id="response"></div>
+        <div id="scenario">Scenario: You run an online store selling handmade jewelry. With Stripe, you can easily set up an online cash register, accept card payments from customers, and manage your finances seamlessly. It ensures the security of your customers' debit/card information.</div>
+    </div>
     <div id="moreDetails">More About Stripe</div>
+    <div id="gameplay">Product Gameplay</div>
     <script>
+        var gameplayToggled = false;
+
         document.getElementById("userInput").addEventListener("keyup", function(event) {
             if (event.key === "Enter") {
                 var userInput = event.target.value.toLowerCase();
@@ -59,11 +86,18 @@
                     document.getElementById("welcome").style.display = "block";
                     document.getElementById("response").innerText = "I need to add price tags to my goods and have a secure payment system that collects debit/card information safely and securely and seamlessly.";
                     document.getElementById("moreDetails").style.display = "block";
+                    document.getElementById("gameplay").style.display = "block";
+                    // Hide the scenario if it was previously toggled
+                    if (!gameplayToggled) {
+                        document.getElementById("scenario").style.display = "none";
+                    }
                 } else {
-                    // Hide the welcome message and other content
+                    // Hide all content if not matching input
                     document.getElementById("welcome").style.display = "none";
                     document.getElementById("response").innerText = "";
                     document.getElementById("moreDetails").style.display = "none";
+                    document.getElementById("gameplay").style.display = "none";
+                    document.getElementById("scenario").style.display = "none";
                 }
                 event.target.value = "";
             }
@@ -72,6 +106,22 @@
         document.getElementById("moreDetails").addEventListener("click", function() {
             // Add the URL to Stripe's "More Details" page here
             window.location.href = "https://www.stripe.com/more-details";
+        });
+
+        document.getElementById("gameplay").addEventListener("click", function() {
+            // Toggle the scenario on and off
+            if (!gameplayToggled) {
+                document.getElementById("scenario").style.display = "block";
+            } else {
+                document.getElementById("scenario").style.display = "none";
+            }
+            gameplayToggled = !gameplayToggled;
+        });
+
+        document.getElementById("scenario").addEventListener("click", function() {
+            // Toggle off the scenario when clicked
+            document.getElementById("scenario").style.display = "none";
+            gameplayToggled = false;
         });
     </script>
 </body>
